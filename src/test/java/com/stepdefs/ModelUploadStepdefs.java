@@ -4,9 +4,13 @@ import com.pages.HomePage;
 import com.pages.ManufacturePage;
 import com.utilitiies.ConfigurationReader;
 import com.utilitiies.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -14,96 +18,71 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class ModelUploadStepdefs {
+    HomePage homePage = new HomePage();
+    ManufacturePage manufacturePage = new ManufacturePage();
 
     @Given("on home page")
-    public void on_home_page() throws InterruptedException {
-       String url=ConfigurationReader.get("url");
-       Driver.get().get(url);
-
-
+    public void on_home_page() {
+        String url = ConfigurationReader.get("url");
+        Driver.get().get(url);
 
     }
 
     @When("click on home hero button")
-    public void click_on_home_hero_button() throws InterruptedException {
+    public void click_on_home_hero_button() {
 
-        HomePage homePage =new HomePage();
         homePage.homevHeroButton.click();
 
+    }
+
+    @And("upload file with upload file button")
+    public void click_on_upload_form_file_input() {
+
+        String projectPath = System.getProperty("user.dir");
+        String filePath = "src/test/resources/files/3D_IGES-402-101-00_WFS.igs";
+        String fullPath = projectPath + "/" + filePath;
+        System.out.println(fullPath);
+        manufacturePage.uploadFormFileInputButton.sendKeys(fullPath);
 
     }
 
-    @When("click on upload form file input")
-    public void click_on_upload_form_file_input() throws InterruptedException, AWTException {
+    @And("send valid user email address")
+    public void send_valid_user_email_address() {
 
-        ManufacturePage manufacturePage=new ManufacturePage();
 
-//        manufacturePage.uploadFormFileInput.sendKeys("\Users\aynurrishat\IdeaProjects\3DHubsTest\src\test\resources\features\3D_IGES-402-101-00_WFS.igs");
+        manufacturePage.emailBox.sendKeys("aynurrishat@gmail.com");
 
-        String filePath = System.getProperty("user.dir") + "/src/res/test.pdf; driver.findElement(By.id("elementID")).sendKeys(filePath);
-        manufacturePage.uploadFormFileInput.click();
+    }
 
+    @And("click on continue your instant quote button")
+    public void click_on_continue_your_instant_quote_button() throws InterruptedException {
+
+        manufacturePage.continueInstantQuoteBox.click();
+        Thread.sleep(5000);
+
+    }
+
+    @And("click on cross sign pop up")
+    public void click_on_cross_sign_pop_up() {
+
+        manufacturePage.crossSign.click();
+
+    }
+
+    @Then("Verify user can upload file")
+    public void user_can_upload_file() throws InterruptedException {
+
+        Assert.assertTrue("verify that the file upload", manufacturePage.uploadFileLocation.isDisplayed());
 
 
     }
 
 
-    @Then("can upload the model file")
-    public void can_upload_the_model_file() throws InterruptedException, AWTException {
-
-        System.out.println("helo");
-
-//        File file =new File("src/test/resources/features/3D_IGES-402-101-00_WFS.igs");
-//
-//        StringSelection stringSelection= new StringSelection(file.getAbsolutePath());
-//
-//        Robot robot = new Robot();
-//
-//        robot.keyPress(KeyEvent.VK_META);
-//
-//        robot.keyPress(KeyEvent.VK_TAB);
-//
-//        robot.keyRelease(KeyEvent.VK_META);
-//
-//        robot.keyRelease(KeyEvent.VK_TAB);
-//        robot.delay(500);
-//        robot.keyPress(KeyEvent.VK_META);
-//
-//        robot.keyPress(KeyEvent.VK_SHIFT);
-//
-//        robot.keyPress(KeyEvent.VK_G);
-//
-//        robot.keyRelease(KeyEvent.VK_META);
-//
-//        robot.keyRelease(KeyEvent.VK_SHIFT);
-//
-//        robot.keyRelease(KeyEvent.VK_G);
-//
-//        robot.keyPress(KeyEvent.VK_META);
-//
-//        robot.keyPress(KeyEvent.VK_V);
-//
-//        robot.keyRelease(KeyEvent.VK_META);
-//
-//        robot.keyRelease(KeyEvent.VK_V);
-//        robot.keyPress(KeyEvent.VK_ENTER);
-//
-//        robot.keyRelease(KeyEvent.VK_ENTER);
-//
-//        robot.delay(500);
-//
-//        robot.keyPress(KeyEvent.VK_ENTER);
-//
-//        robot.keyRelease(KeyEvent.VK_ENTER);
-//
-//        System.out.println("File Upload passed");
-//
-//    }
-
-
-
 }
-}
+
+
+
+
 
 
 

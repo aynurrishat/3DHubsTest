@@ -7,11 +7,11 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 
-   features = "src/test/resources/features",
-       plugin = {"json:target/cucumber.json"},
+        features = "src/test/resources/features",
+        plugin = {"json:target/cucumber.json"},
         glue = "com/stepdefs",
-        dryRun=false,
-        tags="@test"
+        dryRun = false,
+        tags = "@test"
 )
 
 public class CukesRunner {

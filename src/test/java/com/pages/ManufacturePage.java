@@ -12,10 +12,26 @@ public class ManufacturePage {
     }
 
     // select your files
-    @FindBy(css = "div[class='h3d-button h3d-button--s h3d-button--primary']")
-    public WebElement uploadFormFileInput;
 
 
+    @FindBy(id = "file-btn")
+    public WebElement uploadFormFileInputButton;
+
+
+   @FindBy(id="email")
+    public  WebElement emailBox;
+
+
+   @FindBy(xpath= " //button[@type='submit']")
+   public WebElement continueInstantQuoteBox;
+
+
+
+ @FindBy(css="i[class='h3d-icon h3d-icon--1-5x h3d-icon--close']" )
+    public  WebElement crossSign;
+
+ @FindBy(css="div[title='3D_IGES-402-101-00_WFS.igs']")
+ public  WebElement uploadFileLocation;
 
 
 }
