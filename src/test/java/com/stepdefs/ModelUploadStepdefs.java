@@ -41,7 +41,7 @@ public class ModelUploadStepdefs {
         String projectPath = System.getProperty("user.dir");
         String filePath = "src/test/resources/files/3D_IGES-402-101-00_WFS.igs";
         String fullPath = projectPath + "/" + filePath;
-        System.out.println(fullPath);
+
         manufacturePage.uploadFormFileInputButton.sendKeys(fullPath);
 
     }
